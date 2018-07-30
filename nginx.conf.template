@@ -9,8 +9,13 @@ http {
         location / {
             proxy_pass ${UPSTREAM_URL}; 
 
-            auth_basic "Restricted Content";
+            set $auth_basic off;
+            if (-f "/etc/nginx/.htpasswd") {
+              set $auth_basic "Restricted Content";
+            }
+            auth_basic $auth_basic;
             auth_basic_user_file /etc/nginx/.htpasswd;
         }
     }
 }
+
