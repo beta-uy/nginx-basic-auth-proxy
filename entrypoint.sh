@@ -10,7 +10,7 @@ set -e
 [ "" != "$HTPASSWD_FILE_URL" ] \
   && wget -O /etc/nginx/.htpasswd $HTPASSWD_FILE_URL
 
-envsubst '$UPSTREAM_URL $PORT' </etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+envsubst '$UPSTREAM_URL $PORT $EXTRA' </etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
 exec "$@"
 

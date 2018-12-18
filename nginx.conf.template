@@ -15,7 +15,14 @@ http {
             }
             auth_basic $auth_basic;
             auth_basic_user_file /etc/nginx/.htpasswd;
+
+            ${EXTRA}
         }
+
+	location /ping {
+	    access_log off;
+	    return 200 "healthy\n";
+	}
     }
 }
 
